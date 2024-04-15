@@ -1,9 +1,10 @@
 import { useState } from "react";
-import Portal from "../Portal";
+import usePortal from "../hooks/usePortal";
 import ModalContent from "../modal/ModalContent";
 
 export default function PortalModal() {
   const [showModal, setShowModal] = useState();
+  const createPortalContent = usePortal();
 
   return (
     <div className="relative border border-black mb-5 p-2 w-64 h-20 overflow-hidden">
@@ -16,15 +17,14 @@ export default function PortalModal() {
         Show Portal Modal
       </button>
 
-      {showModal && (
-        <Portal>
+      {showModal &&
+        createPortalContent(
           <ModalContent
             onClose={() => {
               setShowModal(false);
             }}
           />
-        </Portal>
-      )}
+        )}
     </div>
   );
 }
